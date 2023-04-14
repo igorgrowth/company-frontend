@@ -3,7 +3,8 @@ import company from "../../store/company";
 import "./AdminMenu.scss";
 
 const AdminMenu: React.FC = observer(() => {
-  const name: string = company.admin; //TO DO
+  //const name: string = company.admin;    TO DO
+  const name: string = "Igor";
 
   return (
     <div className="admin-menu">
