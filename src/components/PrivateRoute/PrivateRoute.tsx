@@ -3,7 +3,7 @@ import company from "../../store/company";
 
 const PrivateRoute: React.FC = () => {
   const token: boolean = company.token;
-  return token ? <Outlet /> : <Navigate to="login" />;
+  return token ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
