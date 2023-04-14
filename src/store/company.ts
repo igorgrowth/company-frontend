@@ -6,7 +6,12 @@ import { ProjectType } from "../types/project";
 import { Position } from "../enums/position";
 
 class Company {
-  token: boolean = false;
+  token: boolean = true;
+  // token: boolean = false;
+
+
+
+
   isLoading: boolean = false;
   error: boolean = false;
 
