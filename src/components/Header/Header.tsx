@@ -1,7 +1,7 @@
 import AdminMenu from "../AdminMenu/AdminMenu";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
-import company from "../../store/company";
+import company from "../../stores/company";
 import "./Header.scss";
 
 const Header: React.FC = () => {

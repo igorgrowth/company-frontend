@@ -7,5 +7,6 @@ export type EmployeeType = {
   lastName?: string;
   email: string;
   position?: Position;
-  project?: Array<ProjectType>;
+  project?: Array<ProjectType> | any;
+  // project?: any
 };

@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import company from "../../store/company";
+import company from "../../stores/company";
 
 const PublicRoute: React.FC = () => {
   const token: boolean = company.token;

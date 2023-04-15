@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import company from "../../store/company";
+import company from "../../stores/company";
 import "./Navigation.scss";
 
 const Navigation: React.FC = () => {
@@ -9,7 +9,7 @@ const Navigation: React.FC = () => {
       <NavLink to={token ? "/employees" : "/login"}>
         {token ? "EMPLOYEES" : "LOG IN"}
       </NavLink>
-      <NavLink to={token ? "/projects" : "registration"}>
+      <NavLink to={token ? "/projects" : "/registration"}>
         {token ? "PROJECTS" : "REGISTRATION"}
       </NavLink>
       {token && <NavLink to="/chat"> CHAT </NavLink>}
