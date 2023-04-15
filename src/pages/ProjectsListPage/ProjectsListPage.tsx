@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { ProjectType } from "../../types/project";
 import { useEffect } from "react";
-import company from "../../stores/company";
+import company from "../../utils/stores/company";
 import { observer } from "mobx-react-lite";
-import "./ProjectsListPage.scss";
 import Loader from "../../components/Loader/Loader";
+import { ProjectType } from "../../utils/types/project";
+import "./ProjectsListPage.scss";
 
 const ProjectsListPage: React.FC = observer(() => {
   const location = useLocation();

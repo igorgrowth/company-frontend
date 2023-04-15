@@ -1,11 +1,14 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import company from "../../stores/company";
-import { EmployeeType } from "../../types/employee";
-import { getEmployeeById } from "../../services/companyAPI";
-import "./EmployeeDetails.scss";
-import Loader from "../../components/Loader/Loader";
 import { observer } from "mobx-react-lite";
+import { EmployeeType } from "../../utils/types/employee";
+import {
+  deleteEmployeeById,
+  getEmployeeById,
+} from "../../utils/services/companyAPI";
+import Loader from "../../components/Loader/Loader";
+import company from "../../utils/stores/company";
+import "./EmployeeDetails.scss";
 
 const EmployeeDetails: React.FC = observer(() => {
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeType | undefined>(
@@ -15,9 +18,8 @@ const EmployeeDetails: React.FC = observer(() => {
   const { employeeId } = useParams();
 
   const getEmployeeInfo = async (employeeId: number) => {
-    company.setIsLoading(true);
-
     try {
+      company.setIsLoading(true);
       const receivedEmployeeInfo: EmployeeType | undefined =
         await getEmployeeById(employeeId);
       setEmployeeInfo(receivedEmployeeInfo);
@@ -28,9 +30,22 @@ const EmployeeDetails: React.FC = observer(() => {
     }
   };
 
+  const deleteEmployee = async (employeeId: number) => {
+    try {
+      company.setIsLoading(true);
+      const response = await deleteEmployeeById(employeeId);
+      console.log(response);
+    } catch (error: any) {
+      company.setError(error.message);
+    } finally {
+      company.setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getEmployeeInfo(Number(employeeId));
-  }, []);
+    console.log(employeeId);
+  }, [employeeId]);
 
   return (
     <>
@@ -42,14 +57,28 @@ const EmployeeDetails: React.FC = observer(() => {
 
       <div className="employee">
         <h2 className="employee__fullname">
-          {employeeInfo?.firstName + " " + employeeInfo?.lastName}
+          {employeeInfo?.firstName + " " + employeeInfo?.lastName || "not known" }
         </h2>
         <p className="employee__email">{employeeInfo?.email || "not known"} </p>
         <p className="employee__position">
           {employeeInfo?.position || "not known"}
         </p>
-        {/* <p className="employee__projects"> {employeeInfo?.project} </p> */}
+        <p className="employee__projects"> {employeeInfo?.project.name} </p>
       </div>
+
+      <Link className="employee__update" to={"update"}>
+        UPDATE
+      </Link>
+
+      <button
+        className="employee__delete"
+        type="submit"
+        onClick={() => {
+          deleteEmployee(Number(employeeId));
+        }}
+      >
+        DELETE
+      </button>
     </>
   );
 });

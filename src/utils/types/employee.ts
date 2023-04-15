@@ -8,5 +8,4 @@ export type EmployeeType = {
   email: string;
   position?: Position;
   project?: Array<ProjectType> | any;
-  // project?: any
 };

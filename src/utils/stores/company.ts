@@ -3,6 +3,7 @@ import { EmployeeType } from "../types/employee";
 import { ProjectType } from "../types/project";
 import { Position } from "../enums/position";
 import { companyService } from "../services/companyAPI";
+import { AxiosResponse } from "axios";
 
 configure({ enforceActions: "observed" });
 
@@ -20,6 +21,10 @@ class Company {
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  cleanEmployeeList() {
+    this.employeeList = [];
   }
 
   setToken(set: boolean): void {
@@ -54,7 +59,7 @@ class Company {
   }
 
   async fetchEmployees(page: number) {
-    const { data } = await companyService.get("employee", {
+    const { data }: AxiosResponse = await companyService.get("employee", {
       params: { page },
     });
     const employees: Array<EmployeeType> = [];
@@ -68,7 +73,7 @@ class Company {
   }
 
   async fetchProjects(page: number) {
-    const { data } = await companyService.get("project", {
+    const { data }: AxiosResponse = await companyService.get("project", {
       params: { page },
     });
     const projects: Array<ProjectType> = [];

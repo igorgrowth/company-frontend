@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import company from "../../stores/company";
+import company from "../../utils/stores/company";
 import "./AdminMenu.scss";
 
 const AdminMenu: React.FC = observer(() => {

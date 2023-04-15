@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { EmployeeType } from "../../types/employee";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import company from "../../stores/company";
-import "./EmployeeListPage.scss";
+import company from "../../utils/stores/company";
 import Loader from "../../components/Loader/Loader";
+import { EmployeeType } from "../../utils/types/employee";
+import "./EmployeeListPage.scss";
 
 const EmployeeListPage: React.FC = observer(() => {
   const location = useLocation();
