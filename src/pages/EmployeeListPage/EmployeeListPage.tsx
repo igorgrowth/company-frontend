@@ -12,7 +12,7 @@ const EmployeeListPage: React.FC = observer(() => {
   const getEmployees = async (page: number) => {
     try {
       company.setIsLoading(true);
-      company.fetchEmployees(page);
+      await company.fetchEmployees(page);
     } catch (error: any) {
       company.setError(error.message);
     } finally {
