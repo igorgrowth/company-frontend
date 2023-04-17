@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import company from "../../utils/stores/company";
 import Loader from "../../components/Loader/Loader";
@@ -8,6 +8,7 @@ import "./EmployeeListPage.scss";
 
 const EmployeeListPage: React.FC = observer(() => {
   const location = useLocation();
+  const [page, setPage] = useState(0);
 
   const getEmployees = async (page: number) => {
     try {
@@ -21,8 +22,12 @@ const EmployeeListPage: React.FC = observer(() => {
   };
 
   useEffect(() => {
-    getEmployees(0);
-  }, []);
+    getEmployees(page);
+  }, [page]);
+
+  const handleChangePage = () => {
+    setPage((prev) => prev + 1);
+  };
 
   return (
     <>
@@ -45,6 +50,12 @@ const EmployeeListPage: React.FC = observer(() => {
           );
         })}
       </ul>
+
+      {company.employeeList.length < company.totalEmployees && (
+        <button className="employee-list__more" onClick={handleChangePage}>
+          LOAD MORE
+        </button>
+      )}
     </>
   );
 });

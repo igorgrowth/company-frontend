@@ -30,6 +30,8 @@ export const deleteEmployeeById = async (id: number) => {
 };
 
 export const addEpmloyee = async (employee: any) => {
+    console.log(employee);
+
   const response: AxiosResponse = await companyService.post(
     "employee",
     employee

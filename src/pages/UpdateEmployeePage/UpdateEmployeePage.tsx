@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { EmployeeType } from "../../utils/types/employee";
@@ -12,7 +12,14 @@ import { Position } from "../../utils/enums/position";
 import "./UpdateEmployeePage.scss";
 
 const UpdateEmployeePage: React.FC = observer(() => {
-  const [employeeInfo, setEmployeeInfo] = useState<EmployeeType>();
+  const navigate = useNavigate();
+  const [employeeInfo, setEmployeeInfo] = useState<any>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    position: Position.FRONTEND,
+  });
+
   const { employeeId } = useParams();
 
   const getEmployeeInfo = async (employeeId: number) => {
@@ -21,7 +28,13 @@ const UpdateEmployeePage: React.FC = observer(() => {
       const receivedEmployeeInfo: EmployeeType = await getEmployeeById(
         employeeId
       );
-      setEmployeeInfo(receivedEmployeeInfo);
+      const info = {
+        firstName: receivedEmployeeInfo.firstName,
+        lastName: receivedEmployeeInfo.lastName,
+        email: receivedEmployeeInfo.email,
+        position: receivedEmployeeInfo.position
+      };
+      setEmployeeInfo(info);
     } catch (error: any) {
       company.setError(error.message);
     } finally {
@@ -54,6 +67,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
     e.preventDefault();
     updateEmployeeInfo(Number(employeeId), employeeInfo);
     company.cleanEmployeeList();
+    navigate("/");
   };
 
   return (

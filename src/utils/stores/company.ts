@@ -19,6 +19,9 @@ class Company {
   employeeList: Array<EmployeeType> = [];
   projectList: Array<ProjectType> = [];
 
+  totalEmployees: number = 0;
+  totalProjects: number = 0;
+
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
   }
@@ -62,6 +65,7 @@ class Company {
     const { data }: AxiosResponse = await companyService.get("employee", {
       params: { page },
     });
+
     const employees: Array<EmployeeType> = [];
     for (let i = 0; i < data.content.length; i++) {
       if (!this.employeeList.some((el) => el.id === data.content[i].id)) {
@@ -69,6 +73,7 @@ class Company {
       }
     }
     this.employeeList = [...this.employeeList, ...employees];
+    this.totalEmployees = data.totalElements;
     console.log("FETCH EMPLOYEES ", data.content);
   }
 

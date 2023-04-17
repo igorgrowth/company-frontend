@@ -1,24 +1,25 @@
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
-import { EmployeeType } from "../../utils/types/employee";
+import { useState } from "react";
 import company from "../../utils/stores/company";
 import { addEpmloyee } from "../../utils/services/companyAPI";
 import { Position } from "../../utils/enums/position";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./AddEmployeeFormPage.scss";
 
 const AddEmployeeFormPage: React.FC = observer(() => {
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  const [employeeInfo, setemployeeInfo] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    position: Position,
-    project: "",
+    position: Position.FRONTEND,
   });
 
-  const addNewEmployee = async (formData: any): Promise<void> => {
+  const addNewEmployee = async (employeeInfo: any): Promise<void> => {
     try {
       company.setIsLoading(true);
-      const response = await addEpmloyee(formData);
+      const response = await addEpmloyee(employeeInfo);
       console.log(response);
     } catch (error: any) {
       company.setError(error.message);
@@ -29,12 +30,14 @@ const AddEmployeeFormPage: React.FC = observer(() => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    addNewEmployee(formData);
+    addNewEmployee(employeeInfo);
+    company.cleanEmployeeList();
+    navigate("/");
   };
 
-  const handleInputChange = (e: any) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setemployeeInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -46,8 +49,8 @@ const AddEmployeeFormPage: React.FC = observer(() => {
           autoComplete="off"
           type="text"
           name="firstName"
-          value={formData.firstName}
-          onChange={handleInputChange}
+          value={employeeInfo.firstName}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -57,8 +60,8 @@ const AddEmployeeFormPage: React.FC = observer(() => {
           autoComplete="off"
           type="text"
           name="lastName"
-          value={formData.lastName}
-          onChange={handleInputChange}
+          value={employeeInfo.lastName}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -68,28 +71,18 @@ const AddEmployeeFormPage: React.FC = observer(() => {
           autoComplete="off"
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        project:
-        <input
-          className="add-employee-form__project"
-          autoComplete="off"
-          type="text"
-          name="project"
-          value={formData.project}
-          onChange={handleInputChange}
+          value={employeeInfo.email}
+          onChange={handleChange}
         />
       </label>
 
       <label>
-        subscription type:
+        position:
         <select
           className="add-employee-form__position"
           name="position"
-          onChange={handleInputChange}
+          onChange={handleChange}
+          id="position"
         >
           <option value={Position.FRONTEND}> FRONTEND</option>
           <option value={Position.BACKEND}> BACKEND</option>
@@ -98,7 +91,12 @@ const AddEmployeeFormPage: React.FC = observer(() => {
           <option value={Position.HR}> HR</option>
         </select>
       </label>
-      <button className="form__btn" type="submit">
+
+      <Link className="add-employee__go-back" to={"/employees"}>
+        CANCEL
+      </Link>
+
+      <button className="add-employee-form__btn" type="submit">
         Submit
       </button>
     </form>

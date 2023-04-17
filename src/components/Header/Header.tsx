@@ -5,12 +5,11 @@ import company from "../../utils/stores/company";
 import "./Header.scss";
 
 const Header: React.FC = () => {
-  const token: boolean = company.token;
   return (
     <header className="header">
       <Logo />
       <Navigation />
-      {token && <AdminMenu />}
+      {company.token && <AdminMenu />}
     </header>
   );
 };

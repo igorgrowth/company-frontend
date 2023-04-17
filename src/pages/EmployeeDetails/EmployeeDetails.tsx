@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { EmployeeType } from "../../utils/types/employee";
@@ -11,6 +11,7 @@ import company from "../../utils/stores/company";
 import "./EmployeeDetails.scss";
 
 const EmployeeDetails: React.FC = observer(() => {
+  const navigate = useNavigate();
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeType | undefined>(
     undefined
   );
@@ -39,6 +40,7 @@ const EmployeeDetails: React.FC = observer(() => {
       company.setError(error.message);
     } finally {
       company.setIsLoading(false);
+      navigate("/employees");
     }
   };
 
@@ -57,13 +59,16 @@ const EmployeeDetails: React.FC = observer(() => {
 
       <div className="employee">
         <h2 className="employee__fullname">
-          {employeeInfo?.firstName + " " + employeeInfo?.lastName || "not known" }
+          {employeeInfo?.firstName + " " + employeeInfo?.lastName ||
+            "not known"}
         </h2>
         <p className="employee__email">{employeeInfo?.email || "not known"} </p>
         <p className="employee__position">
           {employeeInfo?.position || "not known"}
         </p>
-        <p className="employee__projects"> {employeeInfo?.project.name} </p>
+        <p className="employee__projects">
+          {employeeInfo?.project?.name || "not yet assigned"}
+        </p>
       </div>
 
       <Link className="employee__update" to={"update"}>
