@@ -34,6 +34,10 @@ const ProjectDetails = lazy(
   () => import("../../pages/ProjectDetails/ProjectDetails")
 );
 
+const Topic = lazy(
+  () => import("../../pages/Topic/Topic")
+);
+
 const Chat = lazy(() => import("../../pages/Chat/Chat"));
 
 const App: React.FC = () => {
@@ -72,6 +76,10 @@ const App: React.FC = () => {
               />
 
               <Route path="chat" element={<Chat />} />
+
+              <Route path="topic" element={<Topic />} />
+
+
 
               <Route path="*" element={<NotFound />} />
             </Route>

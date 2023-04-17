@@ -13,6 +13,7 @@ const Navigation: React.FC = observer(() => {
         {company.token ? "PROJECTS" : "REGISTRATION"}
       </NavLink>
       {company.token && <NavLink to="/chat"> CHAT </NavLink>}
+      {company.token && <NavLink to="/topic"> Topic </NavLink>}
       {company.token && <NavLink to="/newemployee"> ADD EMPLOYEE </NavLink>}
     </nav>
   );
