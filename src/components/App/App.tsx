@@ -7,7 +7,7 @@ import Login from "../../pages/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import EmployeeListPage from "../../pages/EmployeeListPage/EmployeeListPage";
 import Projects from "../../pages/Projects/Projects";
-import Chat from "../../pages/Chat/Chat";
+import ChatRoom from "../../pages/ChatRoom/ChatRoom";
 import Home from "../../pages/Home/Home";
 import company from "../../store/company";
 import EmployeeDetails from "../../pages/EmployeeDetails/EmployeeDetails";
@@ -37,7 +37,7 @@ const App: React.FC = () => {
             />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:projectId/*" element={<ProjectDetails />} />
-            <Route path="chat" element={<Chat />} />
+            <Route path="chat" element={<ChatRoom />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>
