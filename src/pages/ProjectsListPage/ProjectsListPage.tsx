@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import company from "../../utils/stores/company";
 import { observer } from "mobx-react-lite";
 import Loader from "../../components/Loader/Loader";
@@ -8,6 +8,7 @@ import "./ProjectsListPage.scss";
 
 const ProjectsListPage: React.FC = observer(() => {
   const location = useLocation();
+  const [page, setPage] = useState(0);
 
   const getProjects = async (page: number) => {
     try {
@@ -21,8 +22,12 @@ const ProjectsListPage: React.FC = observer(() => {
   };
 
   useEffect(() => {
-    getProjects(0);
-  }, []);
+    getProjects(page);
+  }, [page]);
+
+  const handleChangePage = () => {
+    setPage((prev) => prev + 1);
+  };
 
   return (
     <>
@@ -42,6 +47,12 @@ const ProjectsListPage: React.FC = observer(() => {
           );
         })}
       </ul>
+
+      {company.projectList.length < company.totalProjects && (
+        <button className="project-list__more" onClick={handleChangePage}>
+          LOAD MORE
+        </button>
+      )}
     </>
   );
 });

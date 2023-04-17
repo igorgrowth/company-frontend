@@ -1,7 +1,6 @@
 import { makeAutoObservable, configure } from "mobx";
 import { EmployeeType } from "../types/employee";
 import { ProjectType } from "../types/project";
-import { Position } from "../enums/position";
 import { companyService } from "../services/companyAPI";
 import { AxiosResponse } from "axios";
 
@@ -46,25 +45,6 @@ class Company {
     this.isLoading = set;
   }
 
-  addEmployee(
-    id: string | number,
-    firstName: string,
-    lastName: string,
-    email: string,
-    position: Position,
-    project: Array<ProjectType>
-  ): EmployeeType {
-    return { id, firstName, lastName, email, position, project };
-  }
-
-  addProject(
-    id: string | number,
-    name: string,
-    employeeList: Array<EmployeeType>
-  ): ProjectType {
-    return { id, name, employeeList };
-  }
-
   async fetchEmployees(page: number) {
     const { data }: AxiosResponse = await companyService.get("employee", {
       params: { page },
@@ -78,7 +58,6 @@ class Company {
     }
     this.employeeList = [...this.employeeList, ...employees];
     this.totalEmployees = data.totalElements;
-    console.log("FETCH EMPLOYEES ", data.content);
   }
 
   async fetchProjects(page: number) {
@@ -92,7 +71,7 @@ class Company {
       }
     }
     this.projectList = [...this.projectList, ...projects];
-    console.log("FETCH PROJECTS ", data);
+    this.totalProjects = data.length;
   }
 }
 

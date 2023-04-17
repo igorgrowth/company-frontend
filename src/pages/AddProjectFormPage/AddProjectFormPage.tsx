@@ -4,6 +4,7 @@ import { useState } from "react";
 import { addProject } from "../../utils/services/companyAPI";
 import company from "../../utils/stores/company";
 import "./AddProjectFormPage.scss";
+import Loader from "../../components/Loader/Loader";
 
 const AddProjectFormPage: React.FC = observer(() => {
   const navigate = useNavigate();
@@ -36,26 +37,29 @@ const AddProjectFormPage: React.FC = observer(() => {
   };
 
   return (
-    <form className="add-project-form" onSubmit={handleSubmit}>
-      <label>
-        name:
-        <input
-          className="add-project-form__input"
-          autoComplete="off"
-          type="text"
-          name="name"
-          value={projectInfo.name}
-          onChange={handleChange}
-        />
-      </label>
-      <Link className="add-project-form__go-back" to={"/projects"}>
-        CANCEL
-      </Link>
+    <>
+      {company.isLoading && <Loader />}
+      <form className="add-project-form" onSubmit={handleSubmit}>
+        <label>
+          name:
+          <input
+            className="add-project-form__input"
+            autoComplete="off"
+            type="text"
+            name="name"
+            value={projectInfo.name}
+            onChange={handleChange}
+          />
+        </label>
+        <Link className="add-project-form__go-back" to={"/projects"}>
+          CANCEL
+        </Link>
 
-      <button className="add-project-form__btn" type="submit">
-        Submit
-      </button>
-    </form>
+        <button className="add-project-form__btn" type="submit">
+          Submit
+        </button>
+      </form>
+    </>
   );
 });
 

@@ -9,6 +9,7 @@ import {
 import company from "../../utils/stores/company";
 import Loader from "../../components/Loader/Loader";
 import { Position } from "../../utils/enums/position";
+import { toast } from "react-toastify";
 import "./UpdateEmployeePage.scss";
 
 const UpdateEmployeePage: React.FC = observer(() => {
@@ -46,7 +47,11 @@ const UpdateEmployeePage: React.FC = observer(() => {
     try {
       company.setIsLoading(true);
       const response = await updateEmployeeById(employeeId, employeeInfo);
-      console.log(response);
+      if (response.status === 200) {
+        toast.success("updated successfully", {
+          autoClose: 2000,
+        });
+      }
     } catch (error: any) {
       company.setError(error.message);
     } finally {

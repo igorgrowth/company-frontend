@@ -8,15 +8,42 @@ import {
 } from "../../utils/services/companyAPI";
 import Loader from "../../components/Loader/Loader";
 import company from "../../utils/stores/company";
+import IsSureModal from "../../components/IsSureModal/IsSureModal";
 import "./EmployeeDetails.scss";
 
 const EmployeeDetails: React.FC = observer(() => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeType | undefined>(
     undefined
   );
   const location = useLocation();
   const { employeeId } = useParams();
+
+  const handleDeleteEmployee = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    (async (employeeId: number) => {
+      try {
+        company.setIsLoading(true);
+        const response = await deleteEmployeeById(employeeId);
+        console.log(response);
+      } catch (error: any) {
+        company.setError(error.message);
+      } finally {
+        company.setIsLoading(false);
+        navigate("/");
+      }
+    })(Number(employeeId));
+
+    setIsModalOpen(false);
+  };
 
   const getEmployeeInfo = async (employeeId: number) => {
     try {
@@ -31,22 +58,8 @@ const EmployeeDetails: React.FC = observer(() => {
     }
   };
 
-  const deleteEmployee = async (employeeId: number) => {
-    try {
-      company.setIsLoading(true);
-      const response = await deleteEmployeeById(employeeId);
-      console.log(response);
-    } catch (error: any) {
-      company.setError(error.message);
-    } finally {
-      company.setIsLoading(false);
-      navigate("/");
-    }
-  };
-
   useEffect(() => {
     getEmployeeInfo(Number(employeeId));
-    console.log(employeeId);
   }, [employeeId]);
 
   return (
@@ -54,9 +67,7 @@ const EmployeeDetails: React.FC = observer(() => {
       <Link className="employee__go-back" to={location?.state?.from ?? "/"}>
         GO BACK
       </Link>
-
       {company.isLoading && <Loader />}
-
       <div className="employee">
         <h2 className="employee__fullname">
           {employeeInfo?.firstName + " " + employeeInfo?.lastName ||
@@ -70,20 +81,22 @@ const EmployeeDetails: React.FC = observer(() => {
           {employeeInfo?.project?.name || "not yet assigned"}
         </p>
       </div>
-
       <Link className="employee__update" to={"updateemp"}>
         UPDATE
       </Link>
-
       <button
         className="employee__delete"
         type="submit"
-        onClick={() => {
-          deleteEmployee(Number(employeeId));
-        }}
+        onClick={handleDeleteEmployee}
       >
         DELETE
       </button>
+
+      <IsSureModal
+        isOpen={isModalOpen}
+        onCancel={handleCancel}
+        onConfirm={handleConfirmDelete}
+      />
     </>
   );
 });
