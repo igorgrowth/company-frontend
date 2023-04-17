@@ -32,7 +32,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
         firstName: receivedEmployeeInfo.firstName,
         lastName: receivedEmployeeInfo.lastName,
         email: receivedEmployeeInfo.email,
-        position: receivedEmployeeInfo.position
+        position: receivedEmployeeInfo.position,
       };
       setEmployeeInfo(info);
     } catch (error: any) {
@@ -79,45 +79,52 @@ const UpdateEmployeePage: React.FC = observer(() => {
       {company.isLoading && <Loader />}
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={employeeInfo?.firstName}
-          onChange={handleChange}
-        />
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={employeeInfo?.lastName}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={employeeInfo?.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="position">Position:</label>
-        <select
-          className=""
-          id="position"
-          name="position"
-          value={employeeInfo?.position}
-          onChange={handleChange}
-        >
-          <option value={Position.FRONTEND}>frontend</option>
-          <option value={Position.BACKEND}>backend</option>
-          <option value={Position.DEVOPS}>devops</option>
-          <option value={Position.MANAGER}>manager</option>
-          <option value={Position.HR}>HR</option>
-        </select>
-
+        <label>
+          first name:
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={employeeInfo?.firstName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          last name:
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={employeeInfo?.lastName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          email:
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={employeeInfo?.email}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          position:
+          <select
+            className=""
+            id="position"
+            name="position"
+            value={employeeInfo?.position}
+            onChange={handleChange}
+          >
+            <option value={Position.FRONTEND}>frontend</option>
+            <option value={Position.BACKEND}>backend</option>
+            <option value={Position.DEVOPS}>devops</option>
+            <option value={Position.MANAGER}>manager</option>
+            <option value={Position.HR}>HR</option>
+          </select>
+        </label>
         <button type="submit">Update</button>
       </form>
     </>

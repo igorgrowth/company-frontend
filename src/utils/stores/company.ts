@@ -30,6 +30,10 @@ class Company {
     this.employeeList = [];
   }
 
+  cleanProjectList() {
+    this.projectList = [];
+  }
+
   setToken(set: boolean): void {
     this.token = set;
   }

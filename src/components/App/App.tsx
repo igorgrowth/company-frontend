@@ -7,6 +7,7 @@ import Registration from "../../pages/Registration/Registration";
 import Login from "../../pages/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NotFound from "../../pages/NotFound/NotFound";
+import AddProjectFormPage from "../../pages/AddProjectFormPage/AddProjectFormPage";
 
 const Home = lazy(() => import("../../pages/Home/Home"));
 
@@ -34,8 +35,13 @@ const ProjectDetails = lazy(
   () => import("../../pages/ProjectDetails/ProjectDetails")
 );
 
+<<<<<<< HEAD
 const Topic = lazy(
   () => import("../../pages/Topic/Topic")
+=======
+const UpdateProjectPage = lazy(
+  () => import("../../pages/UpdateProjectPage/UpdateProjectPage")
+>>>>>>> 3182ff682095db854d0128fed9f7b0ee93aac98c
 );
 
 const Chat = lazy(() => import("../../pages/Chat/Chat"));
@@ -63,7 +69,7 @@ const App: React.FC = () => {
               />
 
               <Route
-                path="employees/:employeeId/update"
+                path="employees/:employeeId/updateemp"
                 element={<UpdateEmployeePage />}
               />
 
@@ -74,6 +80,13 @@ const App: React.FC = () => {
                 path="projects/:projectId/*"
                 element={<ProjectDetails />}
               />
+
+              <Route
+                path="projects/:projectId/updateproj"
+                element={<UpdateProjectPage />}
+              />
+
+              <Route path="newproject" element={<AddProjectFormPage />} />
 
               <Route path="chat" element={<Chat />} />
 

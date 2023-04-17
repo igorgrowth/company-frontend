@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { EmployeeType } from "../types/employee";
+import { ProjectType } from "../types/project";
 
 export const companyService: AxiosInstance = axios.create({
   baseURL: "http://localhost:8080/api/",
@@ -7,6 +8,8 @@ export const companyService: AxiosInstance = axios.create({
     pageSize: 10,
   },
 });
+
+//EMPLOYEE
 
 export const getEmployeeById = async (id: number) => {
   const { data }: AxiosResponse = await companyService.get(`employees/${id}`);
@@ -30,8 +33,6 @@ export const deleteEmployeeById = async (id: number) => {
 };
 
 export const addEpmloyee = async (employee: any) => {
-  console.log(employee);
-
   const response: AxiosResponse = await companyService.post(
     "employees",
     employee
@@ -39,7 +40,30 @@ export const addEpmloyee = async (employee: any) => {
   return response;
 };
 
+//PROJECT
+
 export const getProjectById = async (id: number) => {
   const { data }: AxiosResponse = await companyService.get(`projects/${id}`);
   return data;
 };
+
+export const updateProjectById = async (id: number, project: ProjectType) => {
+  const response: AxiosResponse = await companyService.put(
+    `project/${id}`,
+    project
+  );
+  return response;
+};
+
+export const deleteProjectById = async (id: number) => {
+  const response: AxiosResponse = await companyService.delete(`project/${id}`);
+  return response;
+};
+
+export const addProject = async (project: any) => {
+  const response: AxiosResponse = await companyService.post(
+    "project",
+    project
+  );
+  return response;
+}

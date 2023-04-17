@@ -40,7 +40,7 @@ const EmployeeDetails: React.FC = observer(() => {
       company.setError(error.message);
     } finally {
       company.setIsLoading(false);
-      navigate("/employees");
+      navigate("/");
     }
   };
 
@@ -71,7 +71,7 @@ const EmployeeDetails: React.FC = observer(() => {
         </p>
       </div>
 
-      <Link className="employee__update" to={"update"}>
+      <Link className="employee__update" to={"updateemp"}>
         UPDATE
       </Link>
 
