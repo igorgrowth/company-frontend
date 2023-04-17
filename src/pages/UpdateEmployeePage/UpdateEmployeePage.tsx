@@ -79,7 +79,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
       {company.isLoading && <Loader />}
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name:</label>
+        <label htmlFor="firstName">first name:</label>
         <input
           type="text"
           id="firstName"
@@ -87,7 +87,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
           value={employeeInfo?.firstName}
           onChange={handleChange}
         />
-        <label htmlFor="lastName">Last Name:</label>
+        <label htmlFor="lastName">last name:</label>
         <input
           type="text"
           id="lastName"
@@ -95,7 +95,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
           value={employeeInfo?.lastName}
           onChange={handleChange}
         />
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">email:</label>
         <input
           type="email"
           id="email"
@@ -103,7 +103,7 @@ const UpdateEmployeePage: React.FC = observer(() => {
           value={employeeInfo?.email}
           onChange={handleChange}
         />
-        <label htmlFor="position">Position:</label>
+        <label htmlFor="position">position:</label>
         <select
           className=""
           id="position"

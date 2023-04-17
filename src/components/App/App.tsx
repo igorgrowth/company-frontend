@@ -34,6 +34,10 @@ const ProjectDetails = lazy(
   () => import("../../pages/ProjectDetails/ProjectDetails")
 );
 
+const UpdateProjectPage = lazy(
+  () => import("../../pages/UpdateProjectPage/UpdateProjectPage")
+);
+
 const Chat = lazy(() => import("../../pages/Chat/Chat"));
 
 const App: React.FC = () => {
@@ -59,7 +63,7 @@ const App: React.FC = () => {
               />
 
               <Route
-                path="employees/:employeeId/update"
+                path="employees/:employeeId/updateemp"
                 element={<UpdateEmployeePage />}
               />
 
@@ -69,6 +73,11 @@ const App: React.FC = () => {
               <Route
                 path="projects/:projectId/*"
                 element={<ProjectDetails />}
+              />
+
+              <Route
+                path="projects/:projectId/updateproj"
+                element={<UpdateProjectPage />}
               />
 
               <Route path="chat" element={<Chat />} />

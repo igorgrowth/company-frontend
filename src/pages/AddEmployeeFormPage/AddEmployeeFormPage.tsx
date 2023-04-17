@@ -9,7 +9,7 @@ import "./AddEmployeeFormPage.scss";
 
 const AddEmployeeFormPage: React.FC = observer(() => {
   const navigate = useNavigate();
-  const [employeeInfo, setemployeeInfo] = useState({
+  const [employeeInfo, setemployeeInfo] = useState<any>({
     firstName: "",
     lastName: "",
     email: "",
@@ -37,7 +37,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setemployeeInfo((prev) => ({ ...prev, [name]: value }));
+    setemployeeInfo((prev: any) => ({ ...prev, [name]: value }));
   };
 
   return (
