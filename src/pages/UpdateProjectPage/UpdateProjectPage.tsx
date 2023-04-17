@@ -3,7 +3,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import company from "../../utils/stores/company";
 import { ProjectType } from "../../utils/types/project";
-import { getProjectById, updateProjectById } from "../../utils/services/companyAPI";
+import {
+  getProjectById,
+  updateProjectById,
+} from "../../utils/services/companyAPI";
 import Loader from "../../components/Loader/Loader";
 import "./UpdateProjectPage.scss";
 
@@ -47,6 +50,7 @@ const UpdateProjectPage: React.FC = observer(() => {
   }, [projectId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target);
     const { name, value } = e.target;
     setProjectInfo((prev: any) => ({ ...prev, [name]: value }));
   };
@@ -67,16 +71,17 @@ const UpdateProjectPage: React.FC = observer(() => {
       {company.isLoading && <Loader />}
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="projectName">project name:</label>
-        <input
-          type="text"
-          id="projectName"
-          name="projectName"
-          value={projectInfo?.name}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Update</button>
+        <label>
+          project name:
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={projectInfo?.name}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">update</button>
       </form>
     </>
   );

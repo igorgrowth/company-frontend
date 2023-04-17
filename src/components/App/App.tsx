@@ -7,6 +7,7 @@ import Registration from "../../pages/Registration/Registration";
 import Login from "../../pages/Login/Login";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NotFound from "../../pages/NotFound/NotFound";
+import AddProjectFormPage from "../../pages/AddProjectFormPage/AddProjectFormPage";
 
 const Home = lazy(() => import("../../pages/Home/Home"));
 
@@ -79,6 +80,8 @@ const App: React.FC = () => {
                 path="projects/:projectId/updateproj"
                 element={<UpdateProjectPage />}
               />
+
+              <Route path="newproject" element={<AddProjectFormPage />} />
 
               <Route path="chat" element={<Chat />} />
 

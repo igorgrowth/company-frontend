@@ -14,6 +14,7 @@ const Navigation: React.FC = observer(() => {
       </NavLink>
       {company.token && <NavLink to="/chat"> CHAT </NavLink>}
       {company.token && <NavLink to="/newemployee"> ADD EMPLOYEE </NavLink>}
+      {company.token && <NavLink to="/newproject"> ADD PROJECT </NavLink>}
     </nav>
   );
 });

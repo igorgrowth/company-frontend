@@ -1,15 +1,15 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
-import company from "../../utils/stores/company";
 import { addEpmloyee } from "../../utils/services/companyAPI";
 import { Position } from "../../utils/enums/position";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import company from "../../utils/stores/company";
 import "./AddEmployeeFormPage.scss";
 
 const AddEmployeeFormPage: React.FC = observer(() => {
   const navigate = useNavigate();
-  const [employeeInfo, setemployeeInfo] = useState<any>({
+  const [employeeInfo, setEmployeeInfo] = useState<any>({
     firstName: "",
     lastName: "",
     email: "",
@@ -37,7 +37,7 @@ const AddEmployeeFormPage: React.FC = observer(() => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setemployeeInfo((prev: any) => ({ ...prev, [name]: value }));
+    setEmployeeInfo((prev: any) => ({ ...prev, [name]: value }));
   };
 
   return (
