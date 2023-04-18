@@ -5,10 +5,10 @@ import "./Logo.scss";
 const Logo: FC = () => {
   return (
     <Link className="logo__link" to="/">
-      <h2 className="logo">
-        <span className="logo__span">IGOR</span>GROW
-        <span className="logo__span">TH</span>
-      </h2>
+      <h1 className="logo">
+        I<span className="logo__span">GO</span>R
+        <span className="logo__span">GROW</span>TH
+      </h1>
     </Link>
   );
 };

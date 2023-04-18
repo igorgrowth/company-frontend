@@ -1,4 +1,10 @@
 .header {
+  top: 0;
+  left: 0;
+  position: sticky;
+  z-index: 777;
+  align-items: center;
+
   display: flex;
   flex-direction: row;
 
