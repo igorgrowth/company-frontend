@@ -1,6 +1,7 @@
 @import "/node_modules/modern-normalize/modern-normalize.css";
-@import url("https://fonts.googleapis.com/css2?family=Wallpoet&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Galdeano&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700;800;900&display=swap");
+
 *,
 *::before,
 *::after {
@@ -52,4 +53,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --blue: #007bff;
+  --primary-text: #444444;
+  --secondary-text: #000000;
 }
