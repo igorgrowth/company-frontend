@@ -1,9 +1,10 @@
 .logo {
   font-family: "Galdeano", sans-serif;
-  color: var(--blue);
-
+  color: var(--primary-text);
+  font-weight: 600;
+  font-size: 25px;
 
   &__span {
-    color: var(--primary-text);
+    color: var(--blue);
   }
 }
